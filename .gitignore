@@ -1,0 +1,5 @@
+.idea/*
+myenv/*
+output/*
+__pycache__
+/GUI/outputs/
