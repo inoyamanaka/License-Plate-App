@@ -1,8 +1,10 @@
 import sqlite3
 import os
+import sys
+sys.path.append('D:/python/license-plate-application')
 
 class LicensePlateDatabase:
-    def __init__(self, direktori_path='D:/python/LicensePlateDetector/GUI/database', database_name='license_plate.db'):
+    def __init__(self, direktori_path='D:/python/license-plate-application/GUI/database', database_name='license_plate.db'):
         self.database_path = os.path.join(direktori_path, database_name)
         self.conn = sqlite3.connect(self.database_path)
         self.create_table()
@@ -31,11 +33,19 @@ class LicensePlateDatabase:
         self.conn.commit()
 
     def delete_record(self, record_id):
+        print(record_id)
         query = 'DELETE FROM LICENSE_PLATES WHERE ID=?'
         self.conn.execute(query, (record_id,))
         self.conn.commit()
+        print('sukses')
         
     # -------------------------- GET DATA ----------------------------- #
+    def get_index(self):
+        query = 'SELECT ID FROM LICENSE_PLATES'
+        result = self.conn.execute(query).fetchall()
+
+        index_list = [row[0] for row in result] if result else []
+        return index_list
         
     def get_filepath_list(self):
         query = 'SELECT FILEPATH FROM LICENSE_PLATES'
@@ -60,7 +70,5 @@ class LicensePlateDatabase:
     
      # ---------------------------------------------------------------- #
 
-
     def close_connection(self):
         self.conn.close()
-

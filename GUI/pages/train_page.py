@@ -17,7 +17,7 @@ label_new_4 = tk.Label()
 
 def prevPage(master):
     master.destroy()
-    import base_page
+    import GUI.pages.home_page as home_page
 
 def exit_fullscreen(self, event):
     ws.attributes("-fullscreen", False)
