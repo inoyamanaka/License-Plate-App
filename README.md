@@ -41,7 +41,7 @@ This project aims to detect license plates in images using the YOLOv5 (You Only 
     # Download the OCR model weights and place them in the 'ocr-model' directory
     ```
 
-# Running the License Plate Detector
+## Running the License Plate Detector
 
 To use the license plate detector program, follow these steps:
 
