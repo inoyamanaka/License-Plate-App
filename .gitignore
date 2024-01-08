@@ -3,5 +3,3 @@ myenv/*
 output/*
 __pycache__
 /GUI/outputs/
-build/
-dist/*
