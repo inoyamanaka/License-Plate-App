@@ -41,19 +41,31 @@ This project aims to detect license plates in images using the YOLOv5 (You Only 
     # Download the OCR model weights and place them in the 'ocr-model' directory
     ```
 
-## Usage
+# Running the License Plate Detector
 
-1. Run the license plate detector:
+To use the license plate detector program, follow these steps:
+
+1. **Open Command Prompt or Terminal:**
+   Make sure to open Command Prompt (Windows) or Terminal (Linux/macOS) in the directory containing the executable.
+
+2. **Run the Program:**
+   Enter the following command to run the license plate detector program:
 
     ```
-    python detect_license_plate.py --input image.jpg
+    cd path/to/dist
+    main_page.exe
     ```
 
-    Replace `image.jpg` with the path to your input image.
+    Be sure to replace `path/to/dist` with the path to the directory containing the executable file (`main_page.exe`).
 
-2. View the results:
+3. **Follow Program Instructions:**
+   The program may prompt for input or execute specific actions based on your application design. Follow the on-screen instructions.
 
-    The detected license plates and recognized characters will be displayed on the console.
+4. **View Results:**
+   The detected license plates and recognized characters will be displayed on the screen or directed to the appropriate output.
+
+Ensure that you have provided clear steps and necessary information to ensure users can run the program smoothly. Include additional information such as required Python versions, and make sure users have installed the necessary dependencies before running the program.
+
 
 ## Customization
 
