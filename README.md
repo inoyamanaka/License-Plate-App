@@ -14,7 +14,7 @@ This project aims to detect license plates in images using the YOLOv5 (You Only 
 1. Clone the repository:
 
     ```
-    git clone https://github.com/your-username/license-plate-detector.git
+    git clone https://github.com/inoyamanaka/License-Plate-App.git
     cd license-plate-detector
     ```
 
