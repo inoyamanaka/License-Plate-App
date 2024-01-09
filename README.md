@@ -6,7 +6,7 @@ This project aims to detect license plates in images using the YOLOv5 (You Only 
 
 - Python 3.6 or later
 - YOLOv5
-- Tesseract OCR
+- Easy OCR (Optical Character Recognition)
 - Other dependencies listed in requirements.txt
 
 ## Installation
