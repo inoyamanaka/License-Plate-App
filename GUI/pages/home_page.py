@@ -3,6 +3,7 @@ import tkinter as tk
 from PIL import ImageTk, Image
 
 
+
 sys.path.append('D:/python/license-plate-application')
 from tkinter.tix import IMAGETEXT
 
@@ -14,18 +15,14 @@ class HomePage:
         self.single_preprocess = single_preprocess
         self.multi_preprocess = multi_preprocess
         self.create_content()
-        
-        print(self.single_preprocess)
-
-    def next_page(self):
-        self.master.destroy()
-        import train_page
 
     def on_training_click(self):
-        print("Training button clicked!")
+        self.master.destroy()
+        
+        from GUI.pages.train_class_page import TrainLicensePlateApp
+        TrainLicensePlateApp(master=tk.Tk(), single_preprocess=self.single_preprocess, multi_preprocess=self.multi_preprocess)
 
     def on_testing_click(self):
-        print("Testing button clicked!")
         self.master.destroy()
 
         from GUI.pages.test_page import TestLicensePlateApp
@@ -35,7 +32,7 @@ class HomePage:
         self.master.destroy()
         
         from GUI.pages.crud_page import CrudLicensePlateApp
-        CrudLicensePlateApp(tk.Tk())
+        CrudLicensePlateApp(tk.Tk(), single_preprocess=self.single_preprocess, multi_preprocess=self.multi_preprocess)
 
     def exit_fullscreen(self, event):
         self.master.attributes("-fullscreen", False)
@@ -61,7 +58,7 @@ class HomePage:
         box.create_image(box_size // 2, box_size // 2, anchor=tk.CENTER, image=photo)
 
         # Button Training
-        button_training = tk.Button(frame, text="Training", command=self.next_page,
+        button_training = tk.Button(frame, text="Training", command=lambda: self.on_training_click(),
                                     bg="#D9D9D9", fg="black",
                                     font=("Helvetica", 14),
                                     width=20, pady=5,

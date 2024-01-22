@@ -1,6 +1,11 @@
+import shutil
+import sys
 import tkinter as tk
 from tkinter.tix import IMAGETEXT
-from PIL import ImageTk, Image  
+from PIL import ImageTk, Image
+
+sys.path.append('D:/python/license-plate-application')
+from GUI.pages.train_yolo import YOLOv5Trainer  
 
 # from GUI.pages.home_page import FullscreenApp
 ws = tk.Tk()
@@ -13,11 +18,28 @@ label_new_2 = tk.Label()
 label_new_3 = tk.Label()
 label_new_4 = tk.Label()
 
-
-
 def prevPage(master):
     master.destroy()
     import GUI.pages.home_page as home_page
+    
+def copy_folder(self, source_path, destination_path):
+    try:
+        shutil.copytree(source_path, destination_path)
+        print(f"Folder copied from {source_path} to {destination_path}")
+    except Exception as e:
+        print(f"Error copying folder: {str(e)}")
+
+    
+def start_training(self, img_size, batch_size, epoch):
+    train = YOLOv5Trainer(
+        img_size=img_size,
+        batch_size=batch_size,
+        epochs=epoch,
+        data_path="D:/python/license-plate-application/roboflowdata/data.yaml",
+        weights_path="yolov5/yolov5s.pt",
+    )
+    
+    train.train_yolov5()
 
 def exit_fullscreen(self, event):
     ws.attributes("-fullscreen", False)

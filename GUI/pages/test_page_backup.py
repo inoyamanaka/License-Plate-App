@@ -205,8 +205,6 @@ def preprocessing_1():
                             width=20, pady=5, command=preprocessing_2)
     button_next.grid(row=4, column=2,pady=5)
     button_next.place(y=750, x=860)
-    
-
 
 def preprocessing_2():
     global label_new, label_new_2, label_new_3, label_new_4,  label_titel, button_next
@@ -228,7 +226,6 @@ def preprocessing_2():
     resized_image = original_image.resize((900, 450))
     img = ImageTk.PhotoImage(resized_image)
     
-
     # Create a Label Widget to display the text or Image
     label_new = tk.Label(content_frame, image = img, height=450, width=900, background="#1A1A1A")
     label_new.grid(row=1, column=1,pady=5)
@@ -241,7 +238,6 @@ def preprocessing_2():
     label_new_2 = tk.Label()
     label_new_3 = tk.Label()
     label_new_4 = tk.Label()
-    
     
     # Previous Button
     button_prev = tk.Button(content_frame, text='Prev',
@@ -312,25 +308,15 @@ def preprocessing_3():
 def pilih_folder():
     global list_of_filename, list_of_filename_predict
     folder_selected = filedialog.askdirectory()
-
-    print("Selected Folder:", folder_selected)
     
     try:
-        # Membuka folder dan mendapatkan daftar file di dalamnya
         files = os.listdir(folder_selected)
-
-        # Melakukan iterasi untuk setiap file dalam folder
         for file in files:
-            # Mendapatkan path lengkap untuk setiap file
             file_path = os.path.join(folder_selected, file)
-            
-
-            # Mengecek apakah itu adalah file atau folder
             if os.path.isfile(file_path):
                 character =  multi_processor.process_image(f"{folder_selected}/{file}", filename=file_path)
                 list_of_filename.append(file)
                 list_of_filename_predict.append(character)
-                print("File:", file)
             elif os.path.isdir(file_path):
                 print("Folder:", file)
                 
@@ -338,10 +324,7 @@ def pilih_folder():
         table.field_names = ["File Index", "Filename", "Predicted FIlename"]
         for index, file_path in enumerate(list_of_filename, start=0):
             table.add_row([index, list_of_filename[index], list_of_filename_predict[index]])
-
         filepath = save_to()
-        
-        
         save_table_to_txt(table, filepath.name, 'test_output.txt')
         
 
