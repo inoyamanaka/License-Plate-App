@@ -40,31 +40,50 @@ This project aims to detect license plates in images using the YOLOv5 (You Only 
     mkdir ocr-model
     # Download the OCR model weights and place them in the 'ocr-model' directory
     ```
+# License Plate Detector 🚗🔍
 
-## Running the License Plate Detector
 
-To use the license plate detector program, follow these steps:
+## Installation
 
-1. **Open Command Prompt or Terminal:**
-   Make sure to open Command Prompt (Windows) or Terminal (Linux/macOS) in the directory containing the executable.
+1. Clone the repository:
 
-2. **Run the Program:**
-   Enter the following command to run the license plate detector program:
-
-    ```
-    cd path/to/dist
-    main_page.exe
+    ```bash
+    git clone https://github.com/yourusername/license-plate-detector.git
     ```
 
-    Be sure to replace `path/to/dist` with the path to the directory containing the executable file (`main_page.exe`).
+2. Navigate to the project directory:
 
-3. **Follow Program Instructions:**
-   The program may prompt for input or execute specific actions based on your application design. Follow the on-screen instructions.
+    ```bash
+    cd license-plate-detector
+    ```
 
-4. **View Results:**
-   The detected license plates and recognized characters will be displayed on the screen or directed to the appropriate output.
+3. Install the required dependencies:
 
-Ensure that you have provided clear steps and necessary information to ensure users can run the program smoothly. Include additional information such as required Python versions, and make sure users have installed the necessary dependencies before running the program.
+    ```bash
+    pip install -r requirements.txt
+    ```
+
+## Usage
+
+1. Open Command Prompt (Windows) or Terminal (Linux/macOS).
+
+2. Navigate to the project directory:
+
+    ```bash
+    cd path/to/license-plate-detector
+    ```
+
+3. Run the license plate detector program:
+
+    ```bash
+    GUI/pages/main_page.py
+    ```
+
+    Replace `path/to/license-plate-detector` with the actual path to your project directory.
+
+4. Follow the on-screen instructions to input images or configure the program settings.
+
+5. View the results! 🎉 Detected license plates and recognized characters will be displayed on the screen or directed to the appropriate output.
 
 
 ## Customization
