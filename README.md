@@ -28,9 +28,9 @@ This project aims to detect license plates in images using the YOLOv5 (You Only 
 
     ```
     # From the project root directory
-    mkdir weights
-    cd weights
-    wget https://github.com/ultralytics/yolov5/releases/download/v5.0/yolov5s.pt
+    git clone https://github.com/ultralytics/yolov5  # clone
+    cd yolov5
+    pip install -r requirements.txt
     ```
 
 4. Download pre-trained OCR model:
