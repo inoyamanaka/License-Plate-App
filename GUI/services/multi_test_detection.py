@@ -8,7 +8,7 @@ import re
 import math
 
 class MultiLicensePlateProcessor:
-    def __init__(self, model_path='keremberke/yolov5m-license-plate'):
+    def __init__(self,  model_path='keremberke/yolov5m-license-plate'):
         self.reader = easyocr.Reader(['en'])
         self.model = yolov5.load(model_path)
         self.font = cv2.FONT_HERSHEY_SIMPLEX
@@ -38,7 +38,9 @@ class MultiLicensePlateProcessor:
         return self.plate_character
 
 
-    def process_image(self, img_path, filename):
+    def process_image(self, img_path, filename, file_index):
+        self.file_index = file_index
+        
         try:
             img = img_path
             results = self.model(img, size=640)
@@ -102,12 +104,13 @@ class MultiLicensePlateProcessor:
             imgDraw3 = cv2.putText(imgDraw, result_rr, (int(x1), int(y1) - 10), self.font, self.font_scale,
                                    self.font_color, self.font_thickness)
 
-            cv2.imwrite(f"GUI/outputs/multiple/cropped_img/{filename}_cropped_image.jpg", cropped_image)
-            cv2.imwrite(f'GUI/outputs/multiple/angle_fix_img/{filename}_gambar_lurus.jpg', img_rotated)
-            cv2.imwrite(f"GUI/outputs/multiple/final_img/{filename}_text_draw.jpg", imgDraw3)
+            cv2.imwrite(f"GUI/outputs/multiple/cropped_img/cropped_image{self.file_index}.jpg", cropped_image)
+            cv2.imwrite(f'GUI/outputs/multiple/angle_fix_img/gambar_lurus{self.file_index}.jpg', img_rotated)
+            cv2.imwrite(f"GUI/outputs/multiple/final_img/text_draw{self.file_index}.jpg", imgDraw3)
             
-            print('suksess')
+            print('cek this')
             
+
             return result_rr
 
         except Exception as e:

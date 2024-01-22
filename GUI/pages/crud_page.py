@@ -6,17 +6,22 @@ from tkinter import messagebox
 import sys
 
 
+
 sys.path.append('D:/python/license-plate-application')
 from GUI.database.connect_db import LicensePlateDatabase
+from GUI.pages.edit_detail_page import EditDetailPage
 from GUI.pages.home_page import HomePage
 
 
 class CrudLicensePlateApp:
-    def __init__(self, master):
+    def __init__(self, master, single_preprocess, multi_preprocess):
         self.master = master
         self.master.title("Image Scrollbar Example")
         self.master.title("Fullscreen Window")
         self.master.attributes("-fullscreen", True)
+        
+        self.single_preprocess = single_preprocess
+        self.multi_preprocess = multi_preprocess
 
         self.canvas = tk.Canvas(master, background="#1A1A1A", height=800, width=1110)
         self.canvas.grid(row=1, column=1)
@@ -32,15 +37,19 @@ class CrudLicensePlateApp:
     def refresh(self):
         try:
             self.master.destroy()
-            CrudLicensePlateApp(tk.Tk())
+            CrudLicensePlateApp(tk.Tk(), self.single_preprocess, self.multi_preprocess)
         except Exception as e:
             print(f"Error during refresh: {e}")
 
     def prev_page(self):
         self.master.destroy()
         root = tk.Tk()
-        HomePage(root)
-
+        HomePage(root, self.single_preprocess, self.multi_preprocess)
+        
+    def edit_page(self):
+        self.master.destroy()
+        root = tk.Tk()
+        EditDetailPage(root, self.single_preprocess, self.multi_preprocess)
     def delete_item(self, index):
         answer = messagebox.askquestion("askquestion", "Are you sure want to delete this?")
         if answer == 'yes':
@@ -65,7 +74,7 @@ class CrudLicensePlateApp:
 
         for i, image_path in enumerate(list_filepath):
             self.img = Image.open(image_path)
-            self.img.thumbnail((250, 200))  # Adjust the size as needed
+            self.img.thumbnail((250, 200))
             photo = ImageTk.PhotoImage(self.img)
             self.images.append(photo)
 
@@ -79,7 +88,7 @@ class CrudLicensePlateApp:
             text_label.grid(row=i + 1, column=2, padx=5, pady=5, sticky=tk.W)
 
             button_img2 = ImageTk.PhotoImage(Image.open("GUI/assets/pen.png").resize((30, 30)))
-            button2 = tk.Button(frame, image=button_img2, bg="white", bd=0, height=60, width=60)
+            button2 = tk.Button(frame, image=button_img2, bg="white", bd=0, height=60, width=60, command=lambda: self.edit_page())
             button2.grid(row=i + 1, column=3, padx=5, pady=5, sticky=tk.W)
             button2.image = button_img2
 
@@ -113,6 +122,6 @@ class CrudLicensePlateApp:
         self.master.mainloop()
         
 
-if __name__ == "__main__":
-    root = tk.Tk()
-    app = CrudLicensePlateApp(root)
+# if __name__ == "__main__":
+#     root = tk.Tk()
+#     app = CrudLicensePlateApp(root,)

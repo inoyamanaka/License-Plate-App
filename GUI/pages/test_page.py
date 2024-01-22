@@ -1,6 +1,7 @@
 import os
 import sys
 import tkinter as tk
+from tkinter import ttk
 from tkinter.filedialog import askopenfile, asksaveasfile, askdirectory
 from tkinter.ttk import Progressbar
 from PIL import Image, ImageTk
@@ -42,7 +43,7 @@ class TestLicensePlateApp:
         self.content_frame = tk.Frame(self.master, bg="#1A1A1A")
         self.content_frame.grid(row=0, column=1)
         self.content_frame.place(height=860, width=1400, x=350)
-
+        
         self.create_ui()
 
     def create_ui(self):
@@ -193,10 +194,14 @@ class TestLicensePlateApp:
 
     def do_preprocessing(self):
         # self.processor = LicensePlateProcessor()
-        self.processor.process_image(self.future_image_path, os.path.basename(self.future_image_path))
-        messagebox.showinfo("showinfo", "Success")
-        self.preprocessing_1()
-        
+        try:
+            self.processor.process_image(self.future_image_path, os.path.basename(self.future_image_path))
+            self.preprocessing_1()
+            messagebox.showinfo("showinfo", "Success")
+            
+        except:
+            messagebox.showinfo("showinfo", "kendaraan tidak ditemukan, mohon masukan gambar yang benar")
+            
 
     def preprocessing_1(self):
         self.content_frame.destroy()
@@ -346,6 +351,7 @@ class TestLicensePlateApp:
         print("Selected Folder:", folder_selected)
 
         try:
+            index = 1
             files = os.listdir(folder_selected)
 
             for file in files:
@@ -353,19 +359,26 @@ class TestLicensePlateApp:
 
                 if os.path.isfile(file_path):
                     # messagebox.showinfo("showinfo", "Success")
-                    character = self.multi_processor.process_image(f"{folder_selected}/{file}", filename=file_path)
+                    character = self.multi_processor.process_image(f"{folder_selected}/{file}", filename=file_path, file_index=index)
                     self.list_of_filename.append(file)
                     self.list_of_filename_predict.append(character)
                     print("File:", file)
+                
                 elif os.path.isdir(file_path):
                     print("Folder:", file)
+                
+                index += 1
+            
+            
+            self.folder_preprocess_1()
+            
+            print('ini')
 
             table = PrettyTable()
             table.field_names = ["File Index", "Filename", "Predicted FIlename"]
             for index, file_path in enumerate(self.list_of_filename, start=0):
                 table.add_row([index, self.list_of_filename[index], self.list_of_filename_predict[index]])
 
-        
             folderpath =self.save_to()
             
             print(folderpath)
@@ -374,6 +387,62 @@ class TestLicensePlateApp:
 
         except Exception as e:
             print("Error:", str(e))
+            
+   
+    def folder_preprocess_1(self):
+        self.content_frame.destroy()
+        self.content_frame = tk.Frame(self.master, bg="#1A1A1A")
+        self.content_frame.grid(row=0, column=1)
+        self.content_frame.place(height=860, width=1400, x=350)
+        
+        self.images = []
+        self.label_titel = tk.LabelFrame(self.content_frame, text="Testing Result",
+                                    font=("Helvetica", 20), height=80, fg='white', width=900,
+                                    background="#1A1A1A", labelanchor="n")
+        self.label_titel.grid(row=0, column=0, pady=5)
+        # self.label_titel.place(x=150, y=0)
+        
+        folder_path = 'GUI/outputs/multiple/cropped_img'
+        i = 1
+        for filename in os.listdir(folder_path):
+            file_path = os.path.join(folder_path, filename)
+            self.img = Image.open(file_path)
+            self.img.thumbnail((200, 150))
+            photo = ImageTk.PhotoImage(self.img)
+            self.images.append(photo)
+            
+            label = tk.Label(self.content_frame, image=photo, bg="#1A1A1A")
+            label.grid(row=i + 1, column=0, padx=5, pady=5)
+            label.place(x=100, y=170 * i)
+            i += 1
+        
+        folder_path = 'GUI/outputs/multiple/angle_fix_img'
+        i = 1
+        for filename in os.listdir(folder_path):
+            file_path = os.path.join(folder_path, filename)
+            self.img = Image.open(file_path)
+            self.img.thumbnail((200, 150))
+            photo = ImageTk.PhotoImage(self.img)
+            self.images.append(photo)
+            
+            label = tk.Label(self.content_frame, image=photo, bg="#1A1A1A")
+            label.grid(row=i + 1, column=1, padx=5, pady=5)
+            label.place(x=400, y=170 * i)
+            i += 1
+            
+        folder_path = 'GUI/outputs/multiple/final_img'
+        i = 1
+        for filename in os.listdir(folder_path):
+            file_path = os.path.join(folder_path, filename)
+            self.img = Image.open(file_path)
+            self.img.thumbnail((200, 230))
+            photo = ImageTk.PhotoImage(self.img)
+            self.images.append(photo)
+            
+            label = tk.Label(self.content_frame, image=photo, bg="#1A1A1A")
+            label.grid(row=i + 1, column=2, padx=5, pady=5)
+            label.place(x=750, y=170 * i)
+            i += 1
        
 # Instantiate the LicensePlateApp class and run the application
 # app = TestLicensePlateApp(tk.Tk())
