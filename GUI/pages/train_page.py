@@ -8,6 +8,7 @@ from tkinter.tix import IMAGETEXT
 from PIL import ImageTk, Image
 import yaml
 from GUI.pages.home_page import HomePage
+from tkinter import Tk, filedialog
 
 from GUI.services.train_yolo import YOLOv5Trainer
 
@@ -61,7 +62,8 @@ class TrainLicensePlateApp:
 
         # ------------------------------------------------------------------------
         # Label Title
-        labelframe = tk.LabelFrame(self.content_frame, text="Dataset Preview",
+        labelframe = tk.LabelFrame(self.content_frame, text="Dataset Preview ",
+                                   
                                 font=("Helvetica", 16), fg="white",
                                     background="#1A1A1A", height=50, width=2800)
         labelframe.grid(row=0, column=0,pady=5)
@@ -71,9 +73,28 @@ class TrainLicensePlateApp:
         img = ImageTk.PhotoImage(Image.open("GUI/assets/folder.png"))
 
         # Create a Label Widget to display the text or Image
-        label = tk.Label(self.content_frame, image = img, height=900, width=1400, background="#1A1A1A")
+        label = tk.LabelFrame(self.content_frame, text='1. Dataset harus dilabeli / anotasi terlebih dahulu ',  
+                              font=("Helvetica", 16), fg="white", 
+                              height=80, width=900,
+                              background="#1A1A1A")
         label.grid(row=1, column=0,pady=5)
-        label.place(x=10, y=60)
+        label.place(x=10, y=160)
+        
+         # Create a Label Widget to display the text or Image
+        label2 = tk.LabelFrame(self.content_frame, text='2. Anotasi / labelling dapat dilakukan menggunakan roboflow',  
+                              font=("Helvetica", 16), fg="white", 
+                              height=80, width=900,
+                              background="#1A1A1A")
+        label2.grid(row=1, column=0,pady=5)
+        label2.place(x=10, y=250)
+        
+         # Create a Label Widget to display the text or Image
+        label3 = tk.LabelFrame(self.content_frame,text='3. Lakukan rename pada folder yang berisi dataset yang sudah didownload ',  
+                              font=("Helvetica", 16), fg="white", 
+                              height=80, width=900,
+                              background="#1A1A1A")
+        label3.grid(row=1, column=0,pady=5)
+        label3.place(x=10, y=350)
 
         self.master.mainloop()
 
@@ -134,6 +155,18 @@ class TrainLicensePlateApp:
 
         except Exception as e:
             print(f"Terjadi kesalahan: {str(e)}")
+            
+    def save_model(self):
+        self.folder_selected = askdirectory()
+        new_model_name = filedialog.asksaveasfilename(
+            defaultextension=".pt",
+            filetypes=[("PyTorch Models", "*.pt")],
+            initialfile="new_model_name.pt",
+            title="Save As"
+        )
+        shutil.copy('yolov5m.pt', os.path.join(self.folder_selected, os.path.basename(new_model_name)))
+        
+        
 
     def create_preview_img(self):
         self.content_frame.destroy()
@@ -291,4 +324,12 @@ class TrainLicensePlateApp:
         self.label_4 = tk.Label(self.content_frame, text='result', fg='white', image = self.img_4, height=300, width=700, background="#1A1A1A")
         self.label_4.grid(row=1, column=1,pady=5, padx=5)
         self.label_4.place(x=400, y=400)
+        
+        
+        self.button_next = tk.Button(self.content_frame, text='Save model',
+                                    font=("Helvetica", 14), width=20, pady=5,
+                                    command=lambda: self.save_model())
+        
+        self.button_next.grid(row=4, column=1, pady=5)
+        self.button_next.place(y=780, x=860)
 

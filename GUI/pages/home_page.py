@@ -75,13 +75,13 @@ class HomePage:
         button_testing.grid(row=4, column=0, pady=10, columnspan=2, rowspan=2)
 
         # Button Settings
-        button_training = tk.Button(frame, text="Settings", command=self.on_training_click,
-                                    bg="#D9D9D9", fg="black",
-                                    font=("Helvetica", 14),
-                                    padx=0, pady=5,
-                                    width=20,
-                                    relief=tk.FLAT)
-        button_training.grid(row=6, column=0, columnspan=2, rowspan=2)
+        # button_training = tk.Button(frame, text="Settings", command=self.on_training_click,
+        #                             bg="#D9D9D9", fg="black",
+        #                             font=("Helvetica", 14),
+        #                             padx=0, pady=5,
+        #                             width=20,
+        #                             relief=tk.FLAT)
+        # button_training.grid(row=6, column=0, columnspan=2, rowspan=2)
 
         # Button Crud
         button_testing = tk.Button(frame, text="List License", command=lambda: self.on_crud_click(),
@@ -90,7 +90,7 @@ class HomePage:
                                     padx=0, pady=5,
                                     width=20,
                                     relief=tk.FLAT)
-        button_testing.grid(row=8, column=0, pady=10, columnspan=2, rowspan=2)
+        button_testing.grid(row=8, column=0, columnspan=2, rowspan=2)
 
         # Label Made By
         label_bottom_left = tk.Label(frame, text="By Herlambang Kurniawan", fg="white", bg="#1A1A1A")
