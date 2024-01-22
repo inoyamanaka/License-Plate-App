@@ -18,7 +18,7 @@ class YOLOv5Trainer:
         command = (
             f"python yolov5/train.py --img {self.img_size} "
             f"--batch {self.batch_size} --epochs {self.epochs} "
-            f"--data {self.data_path} --weights {self.weights_path}"
+            f"--data D:/python/license-plate-application/yolov5/yolodata/data.yaml --weights {self.weights_path}"
         )
         print("Training YOLOv5 with command:")
         print(command)
@@ -27,13 +27,13 @@ class YOLOv5Trainer:
         os.system(command)
         
 
-if __name__ == "__main__":
-    # Example usage
-    trainer = YOLOv5Trainer(
-        img_size=640,
-        batch_size=16,
-        epochs=3,
-        data_path="D:/python/license-plate-application/roboflowdata/data.yaml",
-        weights_path="yolov5/yolov5s.pt",
-    )
-    trainer.train_yolov5()
+# if __name__ == "__main__":
+#     # Example usage
+#     trainer = YOLOv5Trainer(
+#         img_size=640,
+#         batch_size=16,
+#         epochs=3,
+#         data_path="D:/python/license-plate-application/roboflowdata/data.yaml",
+#         weights_path="yolov5/yolov5s.pt",
+#     )
+#     trainer.train_yolov5()

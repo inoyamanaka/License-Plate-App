@@ -19,7 +19,7 @@ class HomePage:
     def on_training_click(self):
         self.master.destroy()
         
-        from GUI.pages.train_class_page import TrainLicensePlateApp
+        from GUI.pages.train_page import TrainLicensePlateApp
         TrainLicensePlateApp(master=tk.Tk(), single_preprocess=self.single_preprocess, multi_preprocess=self.multi_preprocess)
 
     def on_testing_click(self):
