@@ -1,12 +1,12 @@
-# License Plate Detector using YOLOv5 and OCR
+# License Plate Detector using YOLOv5 and OCR 🚗🔍
 
 This project aims to detect license plates in images using the YOLOv5 (You Only Look Once) object detection algorithm for plate segmentation. After segmentation, Optical Character Recognition (OCR) is applied to recognize the characters on the detected license plates.
 
 ## Requirements
 
 - Python 3.6 or later
-- YOLOv5
-- Easy OCR (Optical Character Recognition)
+- YOLOv5 🚀
+- Easy OCR (Optical Character Recognition) 📖
 - Other dependencies listed in requirements.txt
 
 ## Installation
