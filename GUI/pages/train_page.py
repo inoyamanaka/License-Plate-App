@@ -57,7 +57,7 @@ class TrainLicensePlateApp:
         # Home Button
         button_home = tk.Button(self.nav_frame, text='Home',
                                 font=("Helvetica", 14),
-                                width=20, pady=5,  command=lambda: self.prev_page())
+                                width=20, pady=5,  command=self.prev_page)
         button_home.grid(row=4, column=0,pady=5, sticky="s")
 
         # ------------------------------------------------------------------------
@@ -99,7 +99,7 @@ class TrainLicensePlateApp:
         self.master.mainloop()
 
     def prev_page(self):
-        self.destroy()
+        self.master.destroy()
         root = tk.Tk()
         HomePage(root, single_preprocess=self.processor, multi_preprocess=self.multi_processor)
 
@@ -116,17 +116,17 @@ class TrainLicensePlateApp:
         print(f"Batch Size: {batch_size}")
         print(f"Image Size: {img_size}")
         
-        # with open(data_path, 'r') as file:
-        #     config_data = yaml.safe_load(file)
+        with open(data_path, 'r') as file:
+            config_data = yaml.safe_load(file)
         
-        # # Ganti nilai variabel dengan path yang sesuai
-        # config_data['train'] = '../dataset/data/train'
-        # config_data['val'] = '../dataset/data/val'
-        # config_data['test'] = '../dataset/data/test'
+        # Ganti nilai variabel dengan path yang sesuai
+        config_data['train'] = 'train'
+        config_data['val'] = 'valid'
+        config_data['test'] = 'test'
         
-        # # Simpan kembali ke file YAML
-        # with open(data_path, 'w') as file:
-        #     yaml.dump(config_data, file)
+        # Simpan kembali ke file YAML
+        with open(data_path, 'w') as file:
+            yaml.dump(config_data, file)
         
         train = YOLOv5Trainer(
             img_size=img_size,
@@ -165,8 +165,6 @@ class TrainLicensePlateApp:
             title="Save As"
         )
         shutil.copy('yolov5m.pt', os.path.join(self.folder_selected, os.path.basename(new_model_name)))
-        
-        
 
     def create_preview_img(self):
         self.content_frame.destroy()
@@ -190,8 +188,8 @@ class TrainLicensePlateApp:
         self.label_titel.place(y=10, x=10)
 
 
-        folder_path = 'GUI/outputs/multiple/cropped_img'
-        # preview image 
+        folder_path = 'D:/python/license-plate-application/yolov5/yolodata/train/images'
+   
         i = 1
         j = 1
         for filename in os.listdir(folder_path):

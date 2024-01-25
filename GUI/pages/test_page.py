@@ -64,6 +64,9 @@ class TestLicensePlateApp:
         self.label.grid(row=1, column=0,pady=5)
         self.label.place(x=10, y=60)
         
+        box_nav = tk.LabelFrame(self.nav_frame, bg="#1A1A1A", height=250)
+        box_nav.grid(row=0, column=0)
+        
         # Choose File Button
         button_file = tk.Button(self.nav_frame, text='Pilih File',
                                 font=("Helvetica", 14),

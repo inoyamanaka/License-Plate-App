@@ -33,7 +33,7 @@ class YOLOv5Trainer:
 #         img_size=640,
 #         batch_size=16,
 #         epochs=3,
-#         data_path="D:/python/license-plate-application/roboflowdata/data.yaml",
+#         data_path="D:/python/license-plate-application/yolov5/yolodata/data.yaml",
 #         weights_path="yolov5/yolov5s.pt",
 #     )
 #     trainer.train_yolov5()

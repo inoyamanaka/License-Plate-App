@@ -24,11 +24,11 @@ class LicensePlateDatabase:
         self.conn.execute(query, values)
         self.conn.commit()
 
-    def update_record(self, record_id, filename, plate_prediction, filepath):
+    def update_record(self, record_id,  plate_prediction):
         query = '''UPDATE LICENSE_PLATES
-                   SET FILENAME=?, PLATE_PREDICTION=?, FILEPATH=?
+                   SET PLATE_PREDICTION=?
                    WHERE ID=?'''
-        values = (filename, plate_prediction, filepath, record_id)
+        values = (plate_prediction, record_id)
         self.conn.execute(query, values)
         self.conn.commit()
 

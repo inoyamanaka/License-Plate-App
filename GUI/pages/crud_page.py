@@ -46,10 +46,11 @@ class CrudLicensePlateApp:
         root = tk.Tk()
         HomePage(root, self.single_preprocess, self.multi_preprocess)
         
-    def edit_page(self):
+    def edit_page(self, image_path, index):
         self.master.destroy()
         root = tk.Tk()
-        EditDetailPage(root, self.single_preprocess, self.multi_preprocess)
+        EditDetailPage(root, self.single_preprocess, self.multi_preprocess, image_path=image_path, db_index=index)
+        
     def delete_item(self, index):
         answer = messagebox.askquestion("askquestion", "Are you sure want to delete this?")
         if answer == 'yes':
@@ -88,7 +89,8 @@ class CrudLicensePlateApp:
             text_label.grid(row=i + 1, column=2, padx=5, pady=5, sticky=tk.W)
 
             button_img2 = ImageTk.PhotoImage(Image.open("GUI/assets/pen.png").resize((30, 30)))
-            button2 = tk.Button(frame, image=button_img2, bg="white", bd=0, height=60, width=60, command=lambda: self.edit_page())
+            button2 = tk.Button(frame, image=button_img2, bg="white", bd=0, height=60, width=60, command=lambda i=i: 
+                self.edit_page(image_path=list_filepath[i], index=list_index[i]))
             button2.grid(row=i + 1, column=3, padx=5, pady=5, sticky=tk.W)
             button2.image = button_img2
 

@@ -10,7 +10,7 @@ from GUI.database.connect_db import LicensePlateDatabase
 from GUI.pages.home_page import HomePage
 
 class EditDetailPage:
-    def __init__(self, master, single_preprocess, multi_preprocess):
+    def __init__(self, master, single_preprocess, multi_preprocess, image_path, db_index):
         self.master = master
         self.master.title("Edit Detail Page")
         self.master.title("Fullscreen Window")
@@ -18,6 +18,8 @@ class EditDetailPage:
         
         self.single_preprocess = single_preprocess
         self.multi_preprocess = multi_preprocess
+        self.img_path = image_path
+        self.index = db_index
 
         self.nav_frame = tk.Frame(master, bg="#1A1A1A")
         self.nav_frame.grid(row=0, column=0)
@@ -38,17 +40,11 @@ class EditDetailPage:
         root = tk.Tk()
         CrudLicensePlateApp(root, single_preprocess=self.single_preprocess, multi_preprocess= self.multi_preprocess)
         
-    def ganti_nama_file(self, path_lama, nama_lama, nama_baru):
-        path_file_lama = os.path.join(path_lama, nama_lama)
-        path_file_baru = os.path.join(path_lama, nama_baru)
+    def ganti_nama_label(self, new_label, index):
+        self.database.update_record(record_id=index, plate_prediction=new_label)
+        messagebox.showinfo("showinfo", "Success")
+       
 
-        try:
-            os.rename(path_file_lama, path_file_baru)
-            print(f"Nama file berhasil diubah dari {nama_lama} menjadi {nama_baru}")
-        except FileNotFoundError:
-            print(f"File dengan nama {nama_lama} tidak ditemukan di path {path_lama}.")
-        except FileExistsError:
-            print(f"File dengan nama {nama_baru} sudah ada di path {path_lama}.")
 
 
     def create_ui_content(self):
@@ -57,7 +53,7 @@ class EditDetailPage:
         label_title.grid(row=1, column=1, pady=5)
         
         # Create an object of tkinter ImageTk
-        original_image = Image.open('D:/python/license-plate-application/GUI/assets/folder.png')
+        original_image = Image.open(self.img_path)
         resized_image = original_image.resize((500, 500))
         img = ImageTk.PhotoImage(resized_image)
 
@@ -93,11 +89,18 @@ class EditDetailPage:
         self.button_change.place(x=350, y=50)
         
         # ---------------------------------------------------------------------------------------
-        # Change Picture
+         # Change Picture
+        button_submit = tk.Button(self.nav_frame, text='Submit', font=("Helvetica", 14),
+                                width=20, pady=5, command=lambda: self.ganti_nama_label(index=self.index,
+                                                                                        new_label= self.label_field.get("1.0", "end-1c")))
+        button_submit.grid(row=0, column=0, pady=5, sticky="s")
+        button_submit.place(y=300, x=60)
+        
+        
         button_back = tk.Button(self.nav_frame, text='Back', font=("Helvetica", 14),
-                                width=20, pady=5,)
+                                width=20, pady=5, command=lambda: self.prev_page() )
         button_back.grid(row=0, column=0, pady=5, sticky="s")
-        button_back.place(y=300, x=60)
+        button_back.place(y=360, x=60)
 
         self.master.mainloop()    
         
